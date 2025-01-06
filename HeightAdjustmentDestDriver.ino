@@ -8,21 +8,21 @@
 BluetoothHandler bluetoothHandler(DEVICE_NAME);
 PowerControl powerControl(ENABLE_12V_PIN);
 
+void handleBluetoothMessage(String message) {
+    Serial.printf("Received message: %s\n", message.c_str());
+    if (message == "0") {
+        powerControl.setState(LOW);
+    } else {
+        powerControl.setState(HIGH);
+    }
+    powerControl.updateState();
+}
+
 void setup() {
     Serial.begin(115200);
-    bluetoothHandler.begin();
+    bluetoothHandler.begin(handleBluetoothMessage);
     powerControl.begin();
 }
 
 void loop() {
-    if (bluetoothHandler.available()) {
-        String message = bluetoothHandler.readMessage();
-        if (message == "0") {
-            powerControl.setState(LOW);
-        } else {
-            powerControl.setState(HIGH);
-        }
-    }
-    powerControl.updateState();
-    delay(10);
 }

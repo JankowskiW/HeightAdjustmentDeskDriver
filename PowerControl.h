@@ -13,7 +13,6 @@ public:
     }
 
     void setState(int state) {
-      Serial.write(state);
         currentState = state;
     }
 
