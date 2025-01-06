@@ -15,6 +15,7 @@ void handleBluetoothMessage(String message) {
     } else {
         powerControl.setState(HIGH);
     }
+    powerControl.updateState();
 }
 
 void setup() {
@@ -24,6 +25,4 @@ void setup() {
 }
 
 void loop() {
-    powerControl.updateState();
-    delay(10);
 }
